@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="btn_width">270px</dimen>
+    <dimen name="btn_height">130px</dimen>
+    
+    <dimen name="margin">10px</dimen>
+</resources>
