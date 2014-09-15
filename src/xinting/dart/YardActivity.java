@@ -2,11 +2,12 @@ package xinting.dart;
 
 import xinting.effect.Orientation;
 import xinting.effect.Position;
+import xinting.effect.ThreeVector;
 import xinting.srv.Coordinate;
 import xinting.srv.Dart;
 import xinting.srv.Person;
 import xinting.srv.Player;
-import xinting.srv.Target;
+import xinting.srv.DartBoard;
 import xinting.view.YardView;
 import android.app.Activity;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ public class YardActivity extends Activity {
 	
 	private Player player = null;
 	private Dart dart = null;
-	private Target target = null;
+	private DartBoard board = null;
 
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
@@ -39,12 +40,14 @@ public class YardActivity extends Activity {
 		
 		dart = new Dart();
 		
-		target = new Target();
+		board = new DartBoard();
+		board.setPosition( new ThreeVector( 1.0, 1.73, 0 ) );
+		board.setNormal( new ThreeVector( -1, 0, 0 ) );
 		
 		yard.Attach( player );
 		yard.addPlayer( player );
 		yard.setDart( dart );
-		yard.setTarget( target );
+		yard.setTarget( board );
 		
 		/*yard.setSystemUiVisibility( View.SYSTEM_UI_FLAG_LOW_PROFILE 
 				| View.SYSTEM_UI_FLAG_FULLSCREEN

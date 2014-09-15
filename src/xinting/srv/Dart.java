@@ -2,6 +2,7 @@ package xinting.srv;
 
 import xinting.effect.Orientation;
 import xinting.effect.Position;
+import xinting.effect.ThreeVector;
 import xinting.effect.Velocity;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -11,19 +12,22 @@ public class Dart implements Entity {
 	
 	private double length = 0.2;
 	private int color = Color.BLUE;
-	private Position pos = null;
-	private Velocity vel = null;
+	private ThreeVector pos = null;
+	private ThreeVector vel = null;
 	private Orientation ori = null;
 	
 	private double ratio = 1.0;
 	
 	private Paint paint = null;
 	
+	private double mass = 2;
+	
 	public Dart() {
 		super();
 		
 		paint = new Paint();
 		paint.setColor( color );
+		paint.setStrokeWidth( 3 );
 	}
 
 	@Override
@@ -37,6 +41,17 @@ public class Dart implements Entity {
 		
 		canvas.drawLine( x1, y1, x2, y2, paint );
 	}
+	
+	public boolean move( long timeinmils ) {
+		/*ThreeVector force = new ThreeVector( 0, -mass, 0 );
+		ThreeVector v = vel.add( force.multi( timeinmils ) );
+		
+		ThreeVector tv = getVel().multi( timeinmils ).add( force.multi( Math.pow( timeinmils, 2 ) / mass / 2 ) );*/
+		ThreeVector tv = getVel().multi( timeinmils );
+		setPos( getPos().add( tv ) );
+		//setVel( v );
+		return true;
+	}
 
 	public int getColor() {
 		return color;
@@ -46,19 +61,19 @@ public class Dart implements Entity {
 		this.color = color;
 	}
 
-	public Position getPos() {
+	public ThreeVector getPos() {
 		return pos;
 	}
 
-	public void setPos( Position pos ) {
+	public void setPos( ThreeVector pos ) {
 		this.pos = pos;
 	}
 
-	public Velocity getVel() {
+	public ThreeVector getVel() {
 		return vel;
 	}
 
-	public void setVel( Velocity vel ) {
+	public void setVel( ThreeVector vel ) {
 		this.vel = vel;
 	}
 
